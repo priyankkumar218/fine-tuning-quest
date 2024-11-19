@@ -49,6 +49,7 @@ if __name__ == '__main__':
 
     # LOAD OPEN AI MODEL
     clip_model, preprocess = clip.load("ViT-B/32")
+    clip_model.float()
 
     # LOAD THE DATA
     data_path = os.getcwd() + '/example_dataset'
@@ -64,5 +65,6 @@ if __name__ == '__main__':
     clip_finetuner = ClipFinetuner(clip_model)
 
     # PTL TRAINER auto-scales across CPUs, GPUs, etc...
-    trainer = L.Trainer(max_steps=100, log_every_n_steps=2)
+    trainer = L.Trainer(max_steps=1000, log_every_n_steps=2)
     trainer.fit(clip_finetuner, train_data)
+    
